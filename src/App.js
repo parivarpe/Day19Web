@@ -1,31 +1,50 @@
 //My component
 
+import { useState } from "react";
+
 export default function App() {
   return (
     <div>
+      <MyComponent></MyComponent>
+      <MyComponent></MyComponent>
       <MyComponent></MyComponent>
     </div>
   );
 }
 
-export function MyComponent() {
-  let uname = " Pari";
-  let email = "pari@gmail.com";
-  let id = 101;
+//using interpolation we can use once decalre varibale multiple times
 
-  let obj = { id: 1, name: "Ved" }; //we have to access objet by calling thir elemnts like obj.id
+function MyComponent() {
+  let [counter, setcounter] = useState(0);
+  let [counter1, setcounter1] = useState(0);
+  function increment() {
+    counter = counter + 1;
+    console.log(counter);
+    setcounter(counter);
+  }
+
+  function decreament() {
+    counter1 = counter1 - 1;
+    setcounter1(counter1);
+    console.log(counter1);
+  }
 
   return (
-    <div>
-      <h2>Hello World!!!</h2>
-      <div> hii {"pari".toUpperCase()} </div>
-
-      <div id={id}> {uname}</div>
-      <div> {email}</div>
-
-      <div>
-        {obj.id} {obj.name}
-      </div>
+    <div className="container-fluid mt-3">
+      <input
+        type="button"
+        value="like"
+        className="btn btn-primary"
+        onClick={increment}
+      />{" "}
+      {counter}
+      <input
+        type="button"
+        value="Dislike"
+        className="btn btn-primary"
+        onClick={decreament}
+      />
+      {counter1}
     </div>
   );
 }
