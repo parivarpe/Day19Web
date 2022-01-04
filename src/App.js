@@ -1,7 +1,7 @@
 //My component
 
 import { useState } from "react";
-import { NavItem } from "react-bootstrap";
+import { ListGroupItem, NavItem } from "react-bootstrap";
 
 export default function App() {
   return (
@@ -14,35 +14,39 @@ export default function App() {
 //using interpolation we can use once decalre varibale multiple times
 
 function MyComponent() {
-  let [message, setMessage] = useState("");
-  let [list, setList] = useState([]);
+  let [tweetMsg, setTweetMsg] = useState("");
+  let [TweetList, setTweetList] = useState([]);
 
-  const TweetHere = (e) => {
-    const newlist = [...list, message];
-    setList(newlist);
-
-    setMessage("");
+  const ChangeTweetMsg = (e) => {
+    const newTweetMsg = e.target.value;
+    setTweetMsg(newTweetMsg);
   };
 
-  const changemsg = (e) => {
-    const newMsg = e.target.value;
-    setMessage(newMsg);
+  const TweetHere = () => {
+    const newTweetList = [tweetMsg, ...TweetList];
+    setTweetList(newTweetList);
+    setTweetMsg("");
   };
 
+  const DeleteTweet = () => {
+    TweetList.splice(0, 1);
+    setTweetList([...TweetList]);
+  };
   return (
     <div>
       <input
         type="text"
-        value={message}
-        className="form forn-control"
-        placeholder="Tweet here...."
-        onChange={changemsg}
+        value={tweetMsg}
+        placeholder="Whats upp...."
+        onChange={ChangeTweetMsg}
       />
       <input type="button" value="Tweet" onClick={TweetHere} />
 
+      <input type="button" value="Delete Tweet" onClick={DeleteTweet} />
+
       <div>
-        {list.map((item) => (
-          <div>{item}</div>
+        {TweetList.map((item, index) => (
+          <div key={index}>{item}</div>
         ))}
       </div>
     </div>
