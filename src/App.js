@@ -6,8 +6,6 @@ export default function App() {
   return (
     <div>
       <MyComponent></MyComponent>
-      <MyComponent></MyComponent>
-      <MyComponent></MyComponent>
     </div>
   );
 }
@@ -15,36 +13,25 @@ export default function App() {
 //using interpolation we can use once decalre varibale multiple times
 
 function MyComponent() {
-  let [counter, setcounter] = useState(0);
-  let [counter1, setcounter1] = useState(0);
-  function increment() {
-    counter = counter + 1;
-    console.log(counter);
-    setcounter(counter);
-  }
+  let [msg, setMsg] = useState("Hello..");
 
-  function decreament() {
-    counter1 = counter1 - 1;
-    setcounter1(counter1);
-    console.log(counter1);
-  }
+  const changeMsg = (e) => {
+    setMsg(e.target.value);
+  };
 
   return (
-    <div className="container-fluid mt-3">
+    <div>
       <input
-        type="button"
-        value="like"
-        className="btn btn-primary"
-        onClick={increment}
-      />{" "}
-      {counter}
-      <input
-        type="button"
-        value="Dislike"
-        className="btn btn-primary"
-        onClick={decreament}
+        type="text"
+        value={msg}
+        className=" form-control"
+        onChange={changeMsg}
       />
-      {counter1}
+
+      <div>{msg}</div>
+      <div>{msg}</div>
+      <div>{msg}</div>
+      <div>{msg}</div>
     </div>
   );
 }
