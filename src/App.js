@@ -14,22 +14,31 @@ export default function App() {
 //using interpolation we can use once decalre varibale multiple times
 
 function MyComponent() {
-  const [list, setList] = useState(["hello"]);
+  let [message, setMessage] = useState("");
+  let [list, setList] = useState([]);
 
-  const tweethere = (e) => {
-    const newlist = [...list, "Hello Univeerse"];
+  const TweetHere = (e) => {
+    const newlist = [...list, message];
     setList(newlist);
+
+    setMessage("");
+  };
+
+  const changemsg = (e) => {
+    const newMsg = e.target.value;
+    setMessage(newMsg);
   };
 
   return (
     <div>
-      <input type="text" placeholder="Tweet here..." className="form-control" />
       <input
-        type="button"
-        value="Tweet"
-        className="btn btn-info btn-lg"
-        onClick={tweethere}
+        type="text"
+        value={message}
+        className="form forn-control"
+        placeholder="Tweet here...."
+        onChange={changemsg}
       />
+      <input type="button" value="Tweet" onClick={TweetHere} />
 
       <div>
         {list.map((item) => (
