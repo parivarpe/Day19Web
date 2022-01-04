@@ -1,6 +1,7 @@
 //My component
 
 import { useState } from "react";
+import { NavItem } from "react-bootstrap";
 
 export default function App() {
   return (
@@ -13,25 +14,28 @@ export default function App() {
 //using interpolation we can use once decalre varibale multiple times
 
 function MyComponent() {
-  let [msg, setMsg] = useState("Hello..");
+  const [list, setList] = useState(["hello"]);
 
-  const changeMsg = (e) => {
-    setMsg(e.target.value);
+  const tweethere = (e) => {
+    const newlist = [...list, "Hello Univeerse"];
+    setList(newlist);
   };
 
   return (
     <div>
+      <input type="text" placeholder="Tweet here..." className="form-control" />
       <input
-        type="text"
-        value={msg}
-        className=" form-control"
-        onChange={changeMsg}
+        type="button"
+        value="Tweet"
+        className="btn btn-info btn-lg"
+        onClick={tweethere}
       />
 
-      <div>{msg}</div>
-      <div>{msg}</div>
-      <div>{msg}</div>
-      <div>{msg}</div>
+      <div>
+        {list.map((item) => (
+          <div>{item}</div>
+        ))}
+      </div>
     </div>
   );
 }
