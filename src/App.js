@@ -14,40 +14,70 @@ export default function App() {
 //using interpolation we can use once decalre varibale multiple times
 
 function MyComponent() {
-  let [tweetMsg, setTweetMsg] = useState("");
-  let [TweetList, setTweetList] = useState([]);
+  const [username, setUserName] = useState("");
+  const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
-  const ChangeTweetMsg = (e) => {
-    const newTweetMsg = e.target.value;
-    setTweetMsg(newTweetMsg);
-  };
+  const [list, setList] = useState([]);
 
-  const TweetHere = () => {
-    const newTweetList = [tweetMsg, ...TweetList];
-    setTweetList(newTweetList);
-    setTweetMsg("");
-  };
+  function changeusername(e) {
+    const newpass = e.target.value;
+    setUserName(newpass);
+  }
 
-  const DeleteTweet = () => {
-    TweetList.splice(0, 1);
-    setTweetList([...TweetList]);
-  };
+  function changepass(e) {
+    const newemail = e.target.value;
+    setpassword(newemail);
+  }
+
+  function changeemail(e) {
+    const newphone = e.target.value;
+    setEmail(newphone);
+  }
+
+  function changephone(e) {
+    const newUname = e.target.value;
+    setPhone(newUname);
+  }
+  function registerHere() {
+    const user = {
+      username: username,
+      password: password,
+      email: email,
+      phone: phone,
+    };
+
+    const newList = [user, ...list];
+  }
+
   return (
     <div>
-      <input
-        type="text"
-        value={tweetMsg}
-        placeholder="Whats upp...."
-        onChange={ChangeTweetMsg}
-      />
-      <input type="button" value="Tweet" onClick={TweetHere} />
+      <div className="p-3">
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Name"
+            onChange={changeusername}
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter Password"
+            onChange={changepass}
+          />
+        </div>
+        <div>
+          <input type="text" placeholder="Enter Email" onChange={changeemail} />
+        </div>
+        <div>
+          <input type="text" placeholder="Enter phone" onChange={changephone} />
+        </div>
 
-      <input type="button" value="Delete Tweet" onClick={DeleteTweet} />
-
-      <div>
-        {TweetList.map((item, index) => (
-          <div key={index}>{item}</div>
-        ))}
+        <div>
+          <input type="button" value="Register" onClick={registerHere} />
+        </div>
       </div>
     </div>
   );
